@@ -46,7 +46,7 @@ jobs:
           context: .
           file: ./API.Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}-${{ github.sha }}
+          tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}:${{ github.sha }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}:buildcache,mode=max
 
@@ -56,7 +56,7 @@ jobs:
           context: .
           file: ./UI.Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}-${{ github.sha }}
+          tags: ${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}:${{ github.sha }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}:buildcache,mode=max
   
@@ -75,11 +75,11 @@ jobs:
           key: "${{ env.SSH_KEY }}"
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ github.actor }} --password-stdin ${{ env.REGISTRY }}
-            docker pull "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}-${{ github.sha }}"
-            docker pull "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}-${{ github.sha }}"
+            docker pull "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}:${{ github.sha }}"
+            docker pull "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}:${{ github.sha }}"
             docker stop "${{ env.UI_CONTAINER_NAME }}" || true
             docker stop "${{ env.API_CONTAINER_NAME }}" || true
             docker rm "${{ env.UI_CONTAINER_NAME }}" || true
             docker rm "${{ env.API_CONTAINER_NAME }}" || true
-            docker run -d --name "${{ env.API_CONTAINER_NAME }}" -p "${{ env.API_PORT }}" "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}-${{ github.sha }}"
-            docker run -d --name "${{ env.UI_CONTAINER_NAME }}" -p "${{ env.UI_PORT }}" "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}-${{ github.sha }}" 
+            docker run -d --name "${{ env.API_CONTAINER_NAME }}" -p "${{ env.API_PORT }}" "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.API_IMAGE_NAME }}:${{ github.sha }}"
+            docker run -d --name "${{ env.UI_CONTAINER_NAME }}" -p "${{ env.UI_PORT }}" "${{ env.REGISTRY }}/${{ env.REPO_NAME}}/${{ env.UI_IMAGE_NAME }}:${{ github.sha }}" 
