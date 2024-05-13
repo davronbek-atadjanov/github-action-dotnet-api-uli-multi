@@ -1,3 +1,4 @@
+using Elastic.Apm.NetCoreAll;
 using GitHub.Actions.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
