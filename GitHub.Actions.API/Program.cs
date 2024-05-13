@@ -20,4 +20,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseAllElasticApm(Configuration);
+
+
 app.Run();

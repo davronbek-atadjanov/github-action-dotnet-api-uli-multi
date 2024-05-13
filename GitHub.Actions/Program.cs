@@ -22,6 +22,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAllElasticApm(Configuration);
+
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
