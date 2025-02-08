@@ -46,7 +46,7 @@ jobs:
           sed -i "s|__NEXUS_PASSWORD__|${{ secrets.NEXUS_PASSWORD }}|g" NuGet.Config
 
       - name: Debug NuGet.Config
-        run: cat Nuget.Config
+        run: cat NuGet.Config
 
       - name: Build and push API Docker image
         uses: docker/build-push-action@v5
