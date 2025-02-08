@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
+
+COPY NuGet.Config /root/.nuget/NuGet/NuGet.Config
 COPY . .
 RUN dotnet restore "GitHub.Actions/GitHub.Actions.csproj"
 WORKDIR "/app/GitHub.Actions"

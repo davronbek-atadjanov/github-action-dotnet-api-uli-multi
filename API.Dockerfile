@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
+
+COPY NuGet.Config /root/.nuget/NuGet/NuGet.Config
 COPY . .
 WORKDIR "/app/GitHub.Actions.API"
 RUN dotnet publish "GitHub.Actions.API.csproj" -o /app/build -c Release
