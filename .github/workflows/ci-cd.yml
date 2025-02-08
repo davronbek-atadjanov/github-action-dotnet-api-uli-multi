@@ -42,8 +42,8 @@ jobs:
 
       - name: Replace Nexus Credentials in NuGet.Config
         run: |
-          sed -i "s|__NEXUS_USER__|${{ secrets.NEXUS_USER }}|g" Nuget.Config
-          sed -i "s|__NEXUS_PASSWORD__|${{ secrets.NEXUS_PASSWORD }}|g" Nuget.Config
+          sed -i "s|__NEXUS_USER__|${{ secrets.NEXUS_USER }}|g" NuGet.Config
+          sed -i "s|__NEXUS_PASSWORD__|${{ secrets.NEXUS_PASSWORD }}|g" NuGet.Config
 
       - name: Debug NuGet.Config
         run: cat Nuget.Config
