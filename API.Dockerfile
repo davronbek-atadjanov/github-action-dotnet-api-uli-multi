@@ -4,6 +4,7 @@ WORKDIR /app
 COPY NuGet.Config /root/.nuget/NuGet/NuGet.Config
 COPY . .
 WORKDIR "/app/GitHub.Actions.API"
+RUN dotnet restore "GitHub.Actions.API.csproj"
 RUN dotnet publish "GitHub.Actions.API.csproj" -o /app/build -c Release
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
